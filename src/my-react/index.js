@@ -1,5 +1,5 @@
-import { createElement } from './createElement';
-import { render } from './render';
+import './globals';
+import { render, createElement } from './render';
 import { workLoop } from './workLoop';
 
 requestIdleCallback(workLoop);

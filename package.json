@@ -22,7 +22,8 @@
       "MyReact": "writable"
     },
     "rules": {
-      "react/style-prop-object": "off"
+      "react/style-prop-object": "off",
+      "semi": ["error", "always"]
     }
   },
   "browserslist": {

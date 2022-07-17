@@ -1,16 +1,43 @@
-export const render = (element, container) => {
-  const dom =
-    element.type === "TEXT_ELEMENT"
-      ? document.createTextNode("")
-      : document.createElement(element.type);
+const createTextElement = (text) => ({
+  type: "TEXT_ELEMENT",
+  props: {
+    nodeValue: text,
+    children: []
+  }
+});
+
+export const createElement = (type, props, ...children) => ({
+  type,
+  props: {
+    ...props,
+    children: children.map(child =>
+      typeof child === "object" ? child : createTextElement(child)
+    )
+  }
+});
+
+export const createNode = (fiber) => {
+  console.log('createNode');
+
+  const node = fiber.type === "TEXT_ELEMENT"
+    ? document.createTextNode("")
+    : document.createElement(fiber.type);
 
   const isProperty = key => key !== "children";
-  Object.keys(element.props)
+  Object.keys(fiber.props)
     .filter(isProperty)
-    .forEach(name => {
-      dom[name] = element.props[name];
+    .forEach(key => {
+      node[key] = fiber.props[key];
     });
 
-  element.props.children.forEach(child => render(child, dom));
-  container.appendChild(dom);
-}
+  return node;
+};
+
+export const render = (element, container) => {
+  MyReact.nextUnitOfWork = {
+    dom: container,
+    props: {
+      children: [element],
+    },
+  };
+};
