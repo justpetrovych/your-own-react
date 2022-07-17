@@ -17,7 +17,13 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "globals": {
+      "MyReact": "writable"
+    },
+    "rules": {
+      "react/style-prop-object": "off"
+    }
   },
   "browserslist": {
     "production": [

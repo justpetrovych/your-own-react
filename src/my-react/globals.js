@@ -1,0 +1,3 @@
+window.MyReact = {
+  nextUnitOfWork: null,
+};
