@@ -70,7 +70,7 @@ export const createElement = (type, props, ...children) => {
   };
 };
 
-export const createDomNode = (fiber) => {
+export const createDom = (fiber) => {
   const domNode =
     fiber.type === "TEXT_ELEMENT"
       ? document.createTextNode("")

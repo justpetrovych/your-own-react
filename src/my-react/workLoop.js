@@ -1,4 +1,4 @@
-import { updateDom, createDomNode } from "./render";
+import { updateDom, createDom } from "./render";
 
 const requestIdleCallbackFallback = (handler) => {
   const start = Date.now();
@@ -111,13 +111,16 @@ const reconcileChildren = (wipFiber, elements) => {
 };
 
 const updateFunctionComponent = (fiber) => {
+  window.MyReact.workingFiber = fiber;
+  window.MyReact.hookIndex = 0;
+  window.MyReact.workingFiber.hooks = [];
   const children = [fiber.type(fiber.props)];
   reconcileChildren(fiber, children);
 };
 
 const updateHostComponent = (fiber) => {
   if (!fiber.dom) {
-    fiber.dom = createDomNode(fiber);
+    fiber.dom = createDom(fiber);
   }
   reconcileChildren(fiber, fiber.props.children);
 };
