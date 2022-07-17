@@ -8,11 +8,17 @@ const onInputHandler = (event) => {
   renderer(event.target.value);
 };
 
+const AppTitle = (props) => (
+  <header>
+    <h1>Hello {props.name}</h1>
+    <h2 style="text-align:right">from MyReact</h2>
+  </header>
+);
+
 const renderer = (value) => {
   const element = (
     <div style="background: #03a9f4">
-      <h1>Hello {value}</h1>
-      <h2 style="text-align:right">from MyReact</h2>
+      <AppTitle name={value} />
       <hr/>
       <input type="text" onInput={onInputHandler} value={value}/>
     </div>
