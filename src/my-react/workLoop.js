@@ -14,7 +14,18 @@ const requestIdleCallbackFallback = (handler) => {
 window.requestIdleCallback = window.requestIdleCallback || requestIdleCallbackFallback;
 
 const commitRoot = () => {
-  console.log(0);
+  commitWork(MyReact.workingRoot.child);
+  MyReact.workingRoot = null;
+};
+
+const commitWork = (fiber) => {
+  if (!fiber) {
+    return;
+  }
+  const domParent = fiber.parent.dom;
+  domParent.appendChild(fiber.dom);
+  commitWork(fiber.child);
+  commitWork(fiber.sibling);
 };
 
 export const workLoop = (deadline) => {
