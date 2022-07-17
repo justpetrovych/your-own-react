@@ -4,10 +4,6 @@ import MyReact from './my-react';
 /** @jsx MyReact.createElement */
 const container = document.getElementById("root"); 
 
-const onInputHandler = (event) => {
-  renderer(event.target.value);
-};
-
 const AppTitle = (props) => (
   <header>
     <h1>Hello {props.name}</h1>
@@ -27,17 +23,34 @@ const Counter = () => {
   );
 };
 
-const renderer = (value) => {
-  const element = (
+const MapItems = () => (
+  <section>
+      <h1>Map items</h1>
+      <ul className='list'>
+          {['React', 'from', 'scratch'].map((item) => (
+            <li>{item}</li>
+          ))}
+      </ul>
+  </section>
+);
+
+const App = () => {
+  const [name, setName] = MyReact.useState("World");
+  return (
     <div style="background: #03a9f4">
-      <AppTitle name={value} />
+      <AppTitle name={name} />
       <hr/>
-      <input type="text" onInput={onInputHandler} value={value}/>
+      <input
+        type="text"
+        onInput={(e) => setName((name) => e.target.value)}
+        value={name}
+      />
       <hr/>
       <Counter />
+      <hr/>
+      <MapItems />
     </div>
   );
-  MyReact.render(element, container);
 };
 
-renderer("Wolrd");
+MyReact.render(<App />, container);
