@@ -17,8 +17,6 @@ export const createElement = (type, props, ...children) => ({
 });
 
 export const createNode = (fiber) => {
-  console.log('createNode');
-
   const node = fiber.type === "TEXT_ELEMENT"
     ? document.createTextNode("")
     : document.createElement(fiber.type);
@@ -34,10 +32,12 @@ export const createNode = (fiber) => {
 };
 
 export const render = (element, container) => {
-  MyReact.nextUnitOfWork = {
+  MyReact.workingRoot = {
     dom: container,
     props: {
       children: [element],
     },
   };
+
+  MyReact.nextUnitOfWork = MyReact.workingRoot;
 };

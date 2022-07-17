@@ -13,19 +13,25 @@ const requestIdleCallbackFallback = (handler) => {
 // shim
 window.requestIdleCallback = window.requestIdleCallback || requestIdleCallbackFallback;
 
+const commitRoot = () => {
+  console.log(0);
+};
+
 export const workLoop = (deadline) => {
   while (MyReact.nextUnitOfWork && deadline.timeRemaining() > 0) {
     MyReact.nextUnitOfWork = performUnitOfWork(MyReact.nextUnitOfWork);
   }
+
+  if (!MyReact.nextUnitOfWork && MyReact.workingRoot) {
+    requestAnimationFrame(commitRoot);
+  }
+
   requestIdleCallback(workLoop);
 };
 
 const performUnitOfWork = (fiber) => {
   if (!fiber.dom) {
     fiber.dom = createNode(fiber);
-  }
-  if (fiber.parent) {
-    fiber.parent.dom.appendChild(fiber.dom);
   }
 
   const elements = fiber.props.children;
