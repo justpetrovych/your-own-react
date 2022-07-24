@@ -1,17 +1,17 @@
 # My homegrown React implementation
 What was done:  
-[x] - working with DOM  
-[x] - implement virtual DOM   
-[x] - Fibers (incremental rendering of the virtual DOM)  
-[x] - Reconcilation  
-[x] - Functional components  
-[x] - Hooks (only useState for now)  
+- [x] - working with DOM  
+- [x] - implement virtual DOM   
+- [x] - Fibers (incremental rendering of the virtual DOM)  
+- [x] - Reconcilation  
+- [x] - Functional components  
+- [x] - Hooks (only useState for now)  
 
 What also can be implemented:  
-[ ] - use an object for the style prop  
-[ ] - useEffect hook  
-[ ] - reconciliation by key  
-[ ] - and much more ...    
+- [ ] - use an object for the style prop  
+- [ ] - useEffect hook  
+- [ ] - reconciliation by key  
+- [ ] - and much more ...    
 
 <hr>
 
