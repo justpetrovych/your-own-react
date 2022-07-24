@@ -1,0 +1,243 @@
+html, body, #root, #app {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+  
+  .scroll-bar::-webkit-scrollbar {
+    background-color: white;
+    width: 4px;
+  }
+  .scroll-bar::-webkit-scrollbar-thumb {
+    background-color: #c8c8c8;
+  }
+  
+  #app {
+    overflow: auto;
+    background: linear-gradient(180deg, #00d2ff 0%, #3a47d5 100%);
+  }
+  #app div, #app h1, #app h2, #app h3, #app h4, #app h5, #app h6, #app input, #app button, #app li, #app textarea {
+    font-family: "Roboto", sans-serif;
+  }
+  #app #hints {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    bottom: 0px;
+    left: 0px;
+    margin: 20px;
+    padding: 15px 20px;
+    position: fixed;
+    z-index: 1;
+  }
+  #app #hints #hint-title {
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+  }
+  #app #hints #hint-title h1 {
+    color: #3c3c3c;
+    font-size: 0.8em;
+    font-weight: 400;
+    margin: 0px;
+  }
+  #app #hints .hint:nth-child(n+2) {
+    margin-top: 5px;
+  }
+  #app #hints .hint i, #app #hints .hint h1 {
+    display: inline-block;
+    height: 12px;
+    vertical-align: top;
+  }
+  #app #hints .hint i {
+    color: #4eb3f1;
+    font-size: 12px;
+  }
+  #app #hints .hint h1 {
+    color: #3c3c3c;
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 12px;
+    margin: 0px;
+    margin-left: 10px;
+  }
+
+  #app #items-outer-container {
+    animation: fadeIn 0.5s ease-in;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
+    left: 50%;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 10;
+  }
+  #app #items-outer-container #items-container {
+    max-height: 600px;
+    overflow: auto;
+    width: 460px;
+  }
+  #app #items-outer-container #items-container #add-item-input {
+    padding: 20px;
+    padding-left: 40px;
+  }
+  #app #items-outer-container #items-container #add-item-input i,
+  #app #items-outer-container #items-container #add-item-input input {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #app #items-outer-container #items-container #add-item-input i {
+    height: 20px;
+    margin-right: 20px;
+    width: 20px;
+    color: #c8c8c8;
+    font-size: 20px;
+  }
+  #app #items-outer-container #items-container #add-item-input input {
+    border: 0px;
+    color: #787878;
+    font-size: 1em;
+    font-weight: 400;
+    height: 20px;
+    outline: 0px;
+    padding: 0px;
+  }
+  #app #items-outer-container #items-container #items {
+    margin: 20px;
+    margin-top: 0px;
+    overflow: hidden;
+    position: relative;
+  }
+  #app #items-outer-container #items-container #items .item {
+    left: 0px;
+    padding: 20px;
+    transition: all 0.5s, background-color 0s;
+    width: calc(100% - 40px);
+  }
+  #app #items-outer-container #items-container #items .item:hover {
+    background-color: rgba(230, 230, 230, 0.4);
+  }
+  #app #items-outer-container #items-container #items .item:hover .item-name-input textarea {
+    background-color: transparent;
+  }
+  #app #items-outer-container #items-container #items .item:hover .item-edit,
+  #app #items-outer-container #items-container #items .item:hover .item-delete {
+    opacity: 1;
+  }
+  #app #items-outer-container #items-container #items .item.completed .item-name h1 {
+    color: #c8c8c8;
+    text-decoration: line-through;
+  }
+  #app #items-outer-container #items-container #items .item.completed .item-edit,
+  #app #items-outer-container #items-container #items .item.editing .item-edit,
+  #app #items-outer-container #items-container #items .item.editing .item-delete {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #app #items-outer-container #items-container #items .item .item-name,
+  #app #items-outer-container #items-container #items .item .item-icon,
+  #app #items-outer-container #items-container #items .item .item-edit,
+  #app #items-outer-container #items-container #items .item .item-name-input,
+  #app #items-outer-container #items-container #items .item .item-delete {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #app #items-outer-container #items-container #items .item .item-name {
+    margin-left: 20px;
+    width: calc(100% - 120px);
+  }
+  #app #items-outer-container #items-container #items .item .item-name h1 {
+    color: #3c3c3c;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0px;
+  }
+  #app #items-outer-container #items-container #items .item .item-icon {
+    cursor: pointer;
+    height: 20px;
+    position: relative;
+    width: 20px;
+    z-index: 2;
+  }
+  #app #items-outer-container #items-container #items .item .item-icon:hover i {
+    color: #43efa9;
+  }
+  #app #items-outer-container #items-container #items .item .item-edit, #app #items-outer-container #items-container #items .item .item-delete {
+    cursor: pointer;
+    height: 18px;
+    line-height: 18px;
+    margin-left: 20px;
+    opacity: 0;
+    position: relative;
+    text-align: center;
+    width: 18px;
+    z-index: 2;
+  }
+  #app #items-outer-container #items-container #items .item .item-edit:hover i,
+  #app #items-outer-container #items-container #items .item .item-delete:hover i {
+    color: #43efa9;
+  }
+  #app #items-outer-container #items-container #items .item .item-name-input {
+    margin-left: 20px;
+    width: calc(100% - 120px);
+  }
+  #app #items-outer-container #items-container #items .item .item-name-input textarea {
+    border: none;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 20px;
+    outline: none;
+    padding: 0px;
+    resize: none;
+    width: 100%;
+  }
+  #app #items-outer-container #items-container #items .item .item-delete:hover i {
+    color: #d32f2f;
+  }
+  #app #items-outer-container #items-container #items #items-completed__header {
+    height: 60px;
+    margin-top: 20px;
+    position: relative;
+  }
+  #app #items-outer-container #items-container #items #items-completed__header:after {
+    background-color: #e6e6e6;
+    content: "";
+    height: 1px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+  }
+  #app #items-outer-container #items-container #items #items-completed__header h1 {
+    color: #c8c8c8;
+    font-size: 1em;
+    font-weight: 400;
+    height: 19px;
+    margin: 0px;
+    padding: 20px;
+    padding-left: 60px;
+  }
+  #app #items-outer-container #items-container #items #items-uncompleted__spacer,
+  #app #items-outer-container #items-container #items #items-completed__spacer {
+    transition: all 0.5s;
+    width: 100%;
+  }
+  #app #items-outer-container #items-container #items #items-uncompleted__spacer {
+    top: 0px;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
