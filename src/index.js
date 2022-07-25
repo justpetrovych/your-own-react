@@ -54,8 +54,8 @@ const Item = (props) => {
 const Hints = () => (
   <div id="hints">
     <div id="hint-title">
-      <h1>This todo-app was build using</h1>
-      <h1><a href='https://github.com/justpetrovich/my-own-react'><i className='fa-brands fa-github'></i> my homegrown React implementation</a></h1>
+      <h1>This todo-app was build using my </h1>
+      <h1><a href='https://github.com/justpetrovich/my-own-react'><i className='fa-brands fa-github'></i> homegrown React implementation</a></h1>
     </div>
     <div className="hint">
       <i className="fas fa-arrow-right"/>
