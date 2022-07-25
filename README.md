@@ -1,4 +1,4 @@
-# Your homegrown React implementation
+# Your homegrown React implementation :atom_symbol:
 What was done:  
 - [x] - working with DOM  
 - [x] - implement virtual DOM   
