@@ -1,4 +1,4 @@
-# My homegrown React implementation
+# Your homegrown React implementation
 What was done:  
 - [x] - working with DOM  
 - [x] - implement virtual DOM   
