@@ -8,9 +8,11 @@ What was done:
 - [x] - Hooks (only useState for now)  
 
 What also can be implemented:  
-- [ ] - use an object for the style prop  
-- [ ] - useEffect hook  
+- [ ] - use an object for the style prop
 - [ ] - reconciliation by key  
+- [ ] - rewrite it to TS
+- [ ] - additional hooks (useEffect, useMemo, useCallback, useRef) 
+- [ ] - Fragments
 - [ ] - and much more ...    
 
 <hr>
