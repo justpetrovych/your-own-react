@@ -69,12 +69,25 @@ const Hints = () => (
       <i className="fas fa-arrow-right"/>
       <h1>Click the the trash item to delete item</h1>
     </div>
-
   </div>
 );
 
 const App = () => {
   const [items, setItems] = MyReact.useState([]);
+  
+  // Loading items from localStorage on first render
+  MyReact.useEffect(() => {
+    const savedItems = localStorage.getItem('todo-items');
+    if (savedItems) {
+      setItems(JSON.parse(savedItems));
+    }
+  }, []); // Empty array means the effect will only run once on mount
+
+  // Saving items to localStorage on every change
+  MyReact.useEffect(() => {
+    localStorage.setItem('todo-items', JSON.stringify(items));
+  }, [items]); // Effect runs on every change of items
+
   const addNewItem = (item) => setItems((items) => [...items, {
     id: items.length + 1,
     name: item,

@@ -28,3 +28,7 @@ export const useState = (initialState) => {
     window.MyReact.hookIndex++;
     return [hook.state, setState];
 };
+
+export const useEffect = (callback, dependencies) => {
+    // TODO: Implement useEffect
+};
