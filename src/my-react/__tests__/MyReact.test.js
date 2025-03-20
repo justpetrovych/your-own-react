@@ -127,4 +127,122 @@ describe('MyReact', () => {
         });
     });
   });
+
+  describe('useEffect', () => {
+    it('should run effect after render', () => {
+      let effectRun = false;
+      const TestComponent = () => {
+        MyReact.useEffect(() => {
+          effectRun = true;
+        }, []);
+        return MyReact.createElement('div', null, 'Test');
+      };
+
+      const container = document.createElement('div');
+      const element = MyReact.createElement(TestComponent, null);
+      
+      MyReact.render(element, container);
+
+      return new Promise(resolve => setTimeout(resolve, 0))
+        .then(() => {
+          expect(effectRun).toBe(true);
+        });
+    });
+
+    it('should re-run effect when dependencies change', () => {
+      let effectCount = 0;
+      let setState;
+      const TestComponent = () => {
+        const [count, setCount] = MyReact.useState(0);
+        setState = setCount;
+        
+        MyReact.useEffect(() => {
+          effectCount++;
+        }, [count]);
+
+        return MyReact.createElement('div', null, count.toString());
+      };
+
+      const container = document.createElement('div');
+      const element = MyReact.createElement(TestComponent, null);
+      
+      MyReact.render(element, container);
+
+      return new Promise(resolve => setTimeout(resolve, 0))
+        .then(() => {
+          expect(effectCount).toBe(1);
+          setState(prev => prev + 1);
+          return new Promise(resolve => setTimeout(resolve, 0));
+        })
+        .then(() => {
+          expect(effectCount).toBe(2);
+        });
+    });
+
+    it('should not re-run effect when dependencies are the same', () => {
+      let effectCount = 0;
+      let setState;
+      const TestComponent = () => {
+        const [count, setCount] = MyReact.useState(0);
+        setState = setCount;
+        
+        MyReact.useEffect(() => {
+          effectCount++;
+        }, []); // Empty dependencies array
+
+        return MyReact.createElement('div', null, count.toString());
+      };
+
+      const container = document.createElement('div');
+      const element = MyReact.createElement(TestComponent, null);
+      
+      MyReact.render(element, container);
+
+      return new Promise(resolve => setTimeout(resolve, 0))
+        .then(() => {
+          expect(effectCount).toBe(1);
+          setState(prev => prev + 1);
+          return new Promise(resolve => setTimeout(resolve, 0));
+        })
+        .then(() => {
+          expect(effectCount).toBe(1); // Should still be 1
+        });
+    });
+
+    it('should call cleanup function before re-running effect', () => {
+      let cleanupCalled = false;
+      let effectCount = 0;
+      let setState;
+      const TestComponent = () => {
+        const [count, setCount] = MyReact.useState(0);
+        setState = setCount;
+        
+        MyReact.useEffect(() => {
+          effectCount++;
+          return () => {
+            cleanupCalled = true;
+          };
+        }, [count]);
+
+        return MyReact.createElement('div', null, count.toString());
+      };
+
+      const container = document.createElement('div');
+      const element = MyReact.createElement(TestComponent, null);
+      
+      MyReact.render(element, container);
+
+      return new Promise(resolve => setTimeout(resolve, 0))
+        .then(() => {
+          expect(effectCount).toBe(1);
+          expect(cleanupCalled).toBe(false);
+          setState(prev => prev + 1);
+          return new Promise(resolve => setTimeout(resolve, 0));
+        })
+        .then(() => {
+          expect(cleanupCalled).toBe(true);
+          expect(effectCount).toBe(2);
+        });
+    });
+  });
 }); 

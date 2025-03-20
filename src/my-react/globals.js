@@ -4,5 +4,5 @@ window.MyReact = {
   currentRoot: null,
   deletions: null,
   workingFiber: null,
-  hookIndex: null,
+  stateHookIndex: null,
 };

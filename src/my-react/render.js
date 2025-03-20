@@ -5,9 +5,7 @@ export const updateDom = (dom, prevProps, nextProps) => {
   Object.keys(prevProps)
     .filter(isEvent)
     .filter(
-      key =>
-        !(key in nextProps) ||
-        isNew(prevProps, nextProps)(key)
+      key => !(key in nextProps) || isNew(prevProps, nextProps)(key)
     )
     .forEach(name => {
       const eventType = name.toLowerCase().substring(2);

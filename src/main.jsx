@@ -77,6 +77,7 @@ const App = () => {
   
   // Loading items from localStorage on first render
   MyReact.useEffect(() => {
+    console.log('getting items from localStorage');
     const savedItems = localStorage.getItem('todo-items');
     if (savedItems) {
       setItems(JSON.parse(savedItems));
@@ -85,6 +86,7 @@ const App = () => {
 
   // Saving items to localStorage on every change
   MyReact.useEffect(() => {
+    console.log('saving items to localStorage');
     localStorage.setItem('todo-items', JSON.stringify(items));
   }, [items]); // Effect runs on every change of items
 

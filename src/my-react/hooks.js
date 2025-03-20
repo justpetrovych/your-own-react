@@ -1,34 +1,41 @@
+import { isFunction } from "./helpers"
+
 export const useState = (initialState) => {
-    const oldHook = 
-        window.MyReact.workingFiber.alternate &&
-        window.MyReact.workingFiber.alternate.hooks &&
-        window.MyReact.workingFiber.alternate.hooks[window.MyReact.hookIndex];
-    const hook = {
-        state: oldHook ? oldHook.state : initialState,
-        queue: [],
+    const oldStateHook = window.MyReact.workingFiber.alternate?.stateHooks?.[window.MyReact.stateHookIndex];
+    const stateHook = {
+        state: oldStateHook ? oldStateHook.state : initialState,
+        queue: oldStateHook ? oldStateHook.queue : [],
     };
 
-    const actions = oldHook ? oldHook.queue : [];
-    actions.forEach(action => {
-      hook.state = action(hook.state);
+    stateHook.queue.forEach(action => {
+        stateHook.state = action(stateHook.state);
     });
 
-    const setState = (newState) => {
-        hook.queue.push(newState);
-        window.MyReact.workingRoot = {
-            dom: window.MyReact.currentRoot.dom,
-            props: window.MyReact.currentRoot.props,
-            alternate: window.MyReact.currentRoot,
-        };
+    stateHook.queue = [];
+    window.MyReact.stateHookIndex++;
+    window.MyReact.workingFiber.stateHooks.push(stateHook);
+
+    const setState = (action) => {
+        stateHook.queue.push(isFunction(action) ? action : () => action);
+        if (window.MyReact.currentRoot) {
+            window.MyReact.workingRoot = {
+                dom: window.MyReact.currentRoot.dom,
+                props: window.MyReact.currentRoot.props,
+                alternate: window.MyReact.currentRoot,
+            };
+        }
         window.MyReact.nextUnitOfWork = window.MyReact.workingRoot;
-        window.MyReact.deletions = [];
+        // window.MyReact.deletions = [];
     };
 
-    window.MyReact.workingFiber.hooks.push(hook);
-    window.MyReact.hookIndex++;
-    return [hook.state, setState];
+    return [stateHook.state, setState];
 };
 
 export const useEffect = (callback, dependencies) => {
-    // TODO: Implement useEffect
+    const effectHook = {
+        callback,
+        dependencies,
+        cleanup: undefined,
+    };
+    window.MyReact.workingFiber.effectHooks.push(effectHook);
 };
