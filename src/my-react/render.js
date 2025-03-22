@@ -76,6 +76,11 @@ export const createDom = (fiber) => {
 
   updateDom(domNode, {}, fiber.props);
 
+  // Handle refs
+  if (fiber.props.ref) {
+    fiber.props.ref.current = domNode;
+  }
+
   return domNode;
 };
 

@@ -32,3 +32,65 @@ export const useState = (initialState) => {
 export const useEffect = (callback, dependencies) => {
     // TODO: Implement useEffect
 };
+
+export const useMemo = (factory, dependencies) => {
+    const oldHook = window.MyReact.workingFiber.alternate?.hooks?.[window.MyReact.hookIndex];
+    
+    const hook = {
+        value: oldHook ? oldHook.value : factory(),
+        dependencies: dependencies || [],
+    };
+
+    // Check if dependencies have changed
+    const hasChanged = !oldHook || 
+        dependencies.some((dep, i) => dep !== oldHook.dependencies[i]);
+
+    if (hasChanged) {
+        hook.value = factory();
+        hook.dependencies = dependencies || [];
+    }
+
+    window.MyReact.workingFiber.hooks.push(hook);
+    window.MyReact.hookIndex++;
+    return hook.value;
+};
+
+export const useCallback = (callback, dependencies) => {
+    const oldHook = 
+        window.MyReact.workingFiber.alternate &&
+        window.MyReact.workingFiber.alternate.hooks &&
+        window.MyReact.workingFiber.alternate.hooks[window.MyReact.hookIndex];
+    
+    const hook = {
+        callback: oldHook ? oldHook.callback : callback,
+        dependencies: dependencies || [],
+    };
+
+    // Check if dependencies have changed
+    const hasChanged = !oldHook || 
+        dependencies.some((dep, i) => dep !== oldHook.dependencies[i]);
+
+    if (hasChanged) {
+        hook.callback = callback;
+        hook.dependencies = dependencies || [];
+    }
+
+    window.MyReact.workingFiber.hooks.push(hook);
+    window.MyReact.hookIndex++;
+    return hook.callback;
+};
+
+export const useRef = (initialValue) => {
+    const oldHook = 
+        window.MyReact.workingFiber.alternate &&
+        window.MyReact.workingFiber.alternate.hooks &&
+        window.MyReact.workingFiber.alternate.hooks[window.MyReact.hookIndex];
+    
+    const hook = {
+        current: oldHook ? oldHook.current : initialValue
+    };
+
+    window.MyReact.workingFiber.hooks.push(hook);
+    window.MyReact.hookIndex++;
+    return hook;
+};
