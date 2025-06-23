@@ -21,7 +21,7 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
-    "jest": "^30.0.0",
+    "jest": "^30.0.2",
     "jest-environment-jsdom": "^30.0.0"
   }
 }
