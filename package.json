@@ -16,7 +16,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.2",
+    "@vitejs/plugin-react": "^5.0.4",
     "vite": "^7.1.7",
     "@testing-library/jest-dom": "^6.8.0",
     "@babel/preset-env": "^7.28.3",
