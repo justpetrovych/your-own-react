@@ -18,7 +18,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
     "vite": "^7.1.7",
-    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/jest-dom": "^6.9.1",
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "jest": "^30.2.0",
