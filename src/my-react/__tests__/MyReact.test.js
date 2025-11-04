@@ -72,6 +72,87 @@ describe('MyReact', () => {
     });
   });
 
+  describe('style prop', () => {
+    it('should apply object styles to DOM element', async () => {
+      const container = document.createElement('div');
+      const element = MyReact.createElement(
+        'div',
+        {
+          style: {
+            color: 'red',
+            fontSize: '14px',
+            backgroundColor: 'blue'
+          }
+        },
+        'Styled text'
+      );
+
+      MyReact.render(element, container);
+
+      // Wait for all microtasks and timers to complete
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      const divElement = container.querySelector('div');
+      expect(divElement.style.color).toBe('red');
+      expect(divElement.style.fontSize).toBe('14px');
+      expect(divElement.style.backgroundColor).toBe('blue');
+    });
+
+    it('should update styles when they change', async () => {
+      let updateStyle;
+      const TestComponent = () => {
+        const [style, setStyle] = MyReact.useState({ color: 'red', fontSize: '12px' });
+        updateStyle = setStyle;
+        return MyReact.createElement('div', { style }, 'Styled text');
+      };
+
+      const container = document.createElement('div');
+      const element = MyReact.createElement(TestComponent, null);
+
+      MyReact.render(element, container);
+
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      const divElement = container.querySelector('div');
+      expect(divElement.style.color).toBe('red');
+      expect(divElement.style.fontSize).toBe('12px');
+
+      // Update styles
+      updateStyle(() => ({ color: 'blue', fontSize: '16px' }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      expect(divElement.style.color).toBe('blue');
+      expect(divElement.style.fontSize).toBe('16px');
+    });
+
+    it('should remove styles that are no longer present', async () => {
+      let updateStyle;
+      const TestComponent = () => {
+        const [style, setStyle] = MyReact.useState({ color: 'red', fontSize: '12px' });
+        updateStyle = setStyle;
+        return MyReact.createElement('div', { style }, 'Styled text');
+      };
+
+      const container = document.createElement('div');
+      const element = MyReact.createElement(TestComponent, null);
+
+      MyReact.render(element, container);
+
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      const divElement = container.querySelector('div');
+      expect(divElement.style.color).toBe('red');
+      expect(divElement.style.fontSize).toBe('12px');
+
+      // Update with only color (fontSize should be removed)
+      updateStyle(() => ({ color: 'blue' }));
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      expect(divElement.style.color).toBe('blue');
+      expect(divElement.style.fontSize).toBe('');
+    });
+  });
+
   describe('useState', () => {
     it('should manage state correctly', () => {
       let setState;
