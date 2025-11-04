@@ -1,4 +1,4 @@
-import { isEvent, isProperty, isNew, isGone } from "./helpers";
+import { isEvent, isStyle, isProperty, isNew, isGone } from "./helpers";
 
 export const updateDom = (dom, prevProps, nextProps) => {
   //Remove old or changed event listeners
@@ -17,6 +17,18 @@ export const updateDom = (dom, prevProps, nextProps) => {
       );
     });
 
+  // Remove old or changed styles
+  if (prevProps.style) {
+    const prevStyle = typeof prevProps.style === "object" ? prevProps.style : {};
+    const nextStyle = nextProps.style && typeof nextProps.style === "object" ? nextProps.style : {};
+
+    Object.keys(prevStyle).forEach(styleName => {
+      if (!(styleName in nextStyle)) {
+        dom.style[styleName] = "";
+      }
+    });
+  }
+
   // Remove old properties
   Object.keys(prevProps)
     .filter(isProperty)
@@ -32,6 +44,18 @@ export const updateDom = (dom, prevProps, nextProps) => {
     .forEach(name => {
       dom[name] = nextProps[name];
     });
+
+  // Set new or changed styles
+  if (nextProps.style && typeof nextProps.style === "object") {
+    const prevStyle = prevProps.style && typeof prevProps.style === "object" ? prevProps.style : {};
+    const nextStyle = nextProps.style;
+
+    Object.keys(nextStyle).forEach(styleName => {
+      if (prevStyle[styleName] !== nextStyle[styleName]) {
+        dom.style[styleName] = nextStyle[styleName];
+      }
+    });
+  }
 
   // Add event listeners
   Object.keys(nextProps)
