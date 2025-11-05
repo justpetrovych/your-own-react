@@ -7,8 +7,8 @@ What was done:
 - [x] - Functional components  
 - [x] - Hooks (only useState for now)  
 
-What also can be implemented:  
-- [ ] - use an object for the style prop
+What also can be implemented:
+- [x] - use an object for the style prop
 - [ ] - reconciliation by key  
 - [ ] - rewrite it to TS
 - [ ] - additional hooks
