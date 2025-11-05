@@ -1,18 +1,18 @@
 # Your homegrown React implementation :atom_symbol:
 What was done:  
-- [x] - working with DOM  
-- [x] - implement virtual DOM   
-- [x] - Fibers (incremental rendering of the virtual DOM)  
-- [x] - Reconcilation  
-- [x] - Functional components  
-- [x] - Hooks (only useState for now)  
+- [x] - working with DOM
+- [x] - implement virtual DOM
+- [x] - Fibers (incremental rendering of the virtual DOM)
+- [x] - Reconcilation
+- [x] - Functional components
+- [x] - Hooks (useState and useEffect)  
 
 What also can be implemented:
 - [x] - use an object for the style prop
-- [ ] - reconciliation by key  
+- [ ] - reconciliation by key
 - [ ] - rewrite it to TS
 - [ ] - additional hooks
-  - [ ] - useEffect
+  - [x] - useEffect
   - [ ] - useMemo
   - [ ] - useCallback
   - [ ] - useRef
