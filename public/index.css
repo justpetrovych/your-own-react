@@ -36,9 +36,6 @@ html, body, #root, #app {
     z-index: 1;
   }
   #app #hints #hint-title {
-    border-bottom: 1px solid #e6e6e6;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
   }
   #app #hints #hint-title h1 {
     color: #3c3c3c;
@@ -55,8 +52,6 @@ html, body, #root, #app {
     vertical-align: top;
   }
   #app #hints .hint i {
-    color: #4eb3f1;
-    font-size: 12px;
   }
   #app #hints .hint h1 {
     color: #3c3c3c;

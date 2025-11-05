@@ -53,20 +53,20 @@ const Item = (props) => {
 
 const Hints = () => (
   <div id="hints">
-    <div id="hint-title">
+    <div id="hint-title" style={{ borderBottom: '1px solid #e6e6e6', marginBottom: '10px', paddingBottom: '5px' }}>
       <h1>This todo-app was build using my </h1>
       <h1><a href='https://github.com/justpetrovich/my-own-react'><i className='fa-brands fa-github'></i> homegrown React implementation</a></h1>
     </div>
     <div className="hint">
-      <i className="fas fa-arrow-right"/>
+      <i className="fas fa-arrow-right" style={{ color: '#4eb3f1', fontSize: '12px' }}/>
       <h1>Enter new todo and click Enter</h1>
     </div>
     <div className="hint">
-      <i className="fas fa-arrow-right"/>
+      <i className="fas fa-arrow-right" style={{ color: '#4eb3f1', fontSize: '12px' }}/>
       <h1>Click the circe to make todo completed</h1>
     </div>
     <div className="hint">
-      <i className="fas fa-arrow-right"/>
+      <i className="fas fa-arrow-right" style={{ color: '#4eb3f1', fontSize: '12px' }}/>
       <h1>Click the the trash item to delete item</h1>
     </div>
   </div>
