@@ -15,9 +15,12 @@ export const useState = (initialState) => {
 
     const setState = (newState) => {
         hook.queue.push(newState);
+        // Use currentRoot if available, otherwise fall back to workingRoot
+        // This handles the case when setState is called from an effect during first render
+        const root = window.MyReact.currentRoot || window.MyReact.workingRoot;
         window.MyReact.workingRoot = {
-            dom: window.MyReact.currentRoot.dom,
-            props: window.MyReact.currentRoot.props,
+            dom: root.dom,
+            props: root.props,
             alternate: window.MyReact.currentRoot,
         };
         window.MyReact.nextUnitOfWork = window.MyReact.workingRoot;

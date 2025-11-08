@@ -4,7 +4,7 @@
   "homepage": "https://justpetrovich.github.io/your-own-react",
   "private": true,
   "dependencies": {
-    "react": "^19.1.1",
+    "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "scripts": {
@@ -16,12 +16,12 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.1.0",
-    "vite": "^7.1.12",
-    "@testing-library/jest-dom": "^6.9.1",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@vitejs/plugin-react": "^5.1.0",
     "jest": "^30.2.0",
-    "jest-environment-jsdom": "^30.2.0"
+    "jest-environment-jsdom": "^30.2.0",
+    "vite": "^7.2.2"
   }
 }
