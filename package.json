@@ -4,7 +4,7 @@
   "homepage": "https://justpetrovich.github.io/your-own-react",
   "private": true,
   "dependencies": {
-    "react": "^19.2.0",
+    "react": "^19.2.1",
     "react-dom": "^19.2.0"
   },
   "scripts": {
