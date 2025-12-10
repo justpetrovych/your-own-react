@@ -88,21 +88,6 @@ const App = () => {
     localStorage.setItem('todo-items', JSON.stringify(items));
   }, [items]); // Effect runs on every change of items
 
-  // Update document title with count of uncompleted items
-  MyReact.useEffect(() => {
-    const uncompletedCount = items.filter(item => !item.isCompleted).length;
-    if (uncompletedCount === 0) {
-      document.title = 'MyReact Todo - All done!';
-    } else {
-      document.title = `MyReact Todo (${uncompletedCount})`;
-    }
-
-    // Cleanup function to reset title when component unmounts
-    return () => {
-      document.title = 'MyReact Todo';
-    };
-  }, [items]); // Effect runs when items change
-
   const addNewItem = (item) => setItems((items) => [...items, {
     id: items.length + 1,
     name: item,

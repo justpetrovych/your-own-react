@@ -52,34 +52,6 @@ const commitWork = (fiber) => {
   commitWork(fiber.sibling);
 };
 
-// Run effects for a fiber and its children
-const runEffects = (fiber) => {
-  if (!fiber) {
-    return;
-  }
-
-  // Run effects for this fiber if it has hooks
-  if (fiber.hooks) {
-    fiber.hooks.forEach(hook => {
-      // Check if this is an effect hook (has callback and hasChanged flag)
-      if (hook.callback && hook.hasChanged !== undefined && hook.hasChanged) {
-        // Run cleanup from previous effect if it exists
-        if (hook.cleanup && typeof hook.cleanup === 'function') {
-          hook.cleanup();
-        }
-
-        // Run the effect and store the cleanup function
-        const cleanup = hook.callback();
-        hook.cleanup = cleanup;
-      }
-    });
-  }
-
-  // Run effects for children
-  runEffects(fiber.child);
-  runEffects(fiber.sibling);
-};
-
 const reconcileChildren = (wipFiber, elements) => {
   let index = 0;
   let oldFiber =
@@ -192,10 +164,6 @@ export const workLoop = (deadline) => {
 const commitRoot = () => {
   window.MyReact.deletions.forEach(commitWork);
   commitWork(window.MyReact.workingRoot.child);
-
-  // Run effects after DOM updates are complete
-  runEffects(window.MyReact.workingRoot.child);
-
   window.MyReact.currentRoot = window.MyReact.workingRoot;
   window.MyReact.workingRoot = null;
 };

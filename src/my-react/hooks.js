@@ -33,29 +33,5 @@ export const useState = (initialState) => {
 };
 
 export const useEffect = (callback, dependencies) => {
-    const oldHook =
-        window.MyReact.workingFiber.alternate &&
-        window.MyReact.workingFiber.alternate.hooks &&
-        window.MyReact.workingFiber.alternate.hooks[window.MyReact.hookIndex];
-
-    // Determine if the effect should run
-    // - First render: always run
-    // - No dependencies: always run on every render
-    // - With dependencies: run if any dependency changed
-    const hasChanged = oldHook
-        ? !dependencies || // no dependencies array means always run
-          !oldHook.dependencies || // old hook had no dependencies
-          dependencies.length !== oldHook.dependencies.length || // different number of deps
-          dependencies.some((dep, i) => !Object.is(dep, oldHook.dependencies[i])) // compare each dependency
-        : true; // first render, always run
-
-    const hook = {
-        callback,
-        dependencies,
-        cleanup: oldHook ? oldHook.cleanup : null,
-        hasChanged, // flag to know if we should run this effect
-    };
-
-    window.MyReact.workingFiber.hooks.push(hook);
-    window.MyReact.hookIndex++;
+    // TODO: Implement useEffect
 };
